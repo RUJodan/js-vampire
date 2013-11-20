@@ -49,9 +49,15 @@ function triggerDeath(cause) {
 }
 
 function healDamage(heal) {
-	if ((hp+heal) > hpMax) hp = hpMax;
-	else hp += heal;
-	document.getElementById("hp").innerHTML = hp;
+	if (dead) {
+		hp = 1;
+		addEventMsg("The powerful of the nights moon revives you enough to resume hunting.");
+		dead = false;
+	} else {
+		if ((hp+heal) > hpMax) hp = hpMax;
+		else hp += heal;
+		document.getElementById("hp").innerHTML = hp;
+	}
 }
 
 function dealDamage(dmg,type) {
@@ -94,6 +100,7 @@ function enableButton(bid,bEvent,newTxt) {
 	else {
 		element.disabled = false;
 		element.innerHTML = newTxt;
+		healDamage(1);
 	}
 }
 
@@ -110,7 +117,6 @@ function hunt() {
 		bloodCount += bloodCollected;
 		blood.innerHTML = bloodCount;
 		addEventMsg("Your hunt yielded "+bloodCollected+" pint(s) of blood!");
-		healDamage(1);
 	}
 }
 
@@ -141,27 +147,28 @@ function elm(name,props,style){
 	return el;
 }
 
-function startDayCycle() {
+function initDayCycle() {
 	var day = document.getElementById("divCycle").style.display = "block";
 	dayStatus = "dusk";
 	var cycle = document.getElementById("cycle");
 	cycle.innerHTML = dayStatus;
 	multiplier = 3;
-	setInterval(function() {
-		var index = statusCycle.indexOf(dayStatus);
-		var cycleNext = statusCycle[(index+1)];
-		if (cycleNext) {
-			dayStatus = cycleNext;
-			multiplier = huntStatus[cycleNext];
-		}
-		else {
-			dayStatus = statusCycle[0];
-			multiplier = huntStatus[dayStatus];
-		}
-		cycle.innerHTML = dayStatus;
-		var newIndex = statusCycle.indexOf(dayStatus);
-		addEventMsg(dayFlavor[newIndex]);
-	},10000);
+}
+
+function changeDayCycle() {
+	var index = statusCycle.indexOf(dayStatus);
+	var cycleNext = statusCycle[(index+1)];
+	if (cycleNext) {
+		dayStatus = cycleNext;
+		multiplier = huntStatus[cycleNext];
+	}
+	else {
+		dayStatus = statusCycle[0];
+		multiplier = huntStatus[dayStatus];
+	}
+	cycle.innerHTML = dayStatus;
+	var newIndex = statusCycle.indexOf(dayStatus);
+	addEventMsg(dayFlavor[newIndex]);
 }
 
 function triggers(count) {
@@ -169,15 +176,18 @@ function triggers(count) {
 	if(!(count % 2) && count > 5) {
 		enableButton("bloodButton","hunt","Hunt for Blood");
 	}
-	if(!(count % 10) && bloodCount > 35) {
+	if(!(count % 5) && bloodCount > 35) {
 		enableButton("raidButton","raid","Raid for Gold");
 	}
 	if (bloodCount >= 10 && !cycleFlag) {
-		startDayCycle();
+		initDayCycle();
 		cycleFlag = true;
 	}
 	if (bloodCount >= 35 && !raidFlag) {
 		raidButton();
 		raidFlag = true;
+	}
+	if (!(count%10) && cycleFlag) {
+		changeDayCycle();
 	}
 }
