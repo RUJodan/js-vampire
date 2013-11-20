@@ -4,6 +4,9 @@ var multiplier = 1;
 var dayStatus;
 var cycleFlag = false;
 var herpButton;
+var hp = 20;
+var hpMax = 20;
+var firstHPLoss = false;
 var counter = document.getElementById("counter");
 var blood = document.getElementById("blood");
 var statusCycle = [
@@ -31,9 +34,38 @@ setInterval(function() {
 	triggers(count);
 }, 1000);
 
+function triggerDeath(cause) {
+	var bloodloss = 20;
+	addEventMsg("You have died from: "+cause);
+	addEventMsg("Your death has cost you "+bloodloss+" of your precious blood!");
+	if (bloodCount < 20) bloodCount = 0;
+	else bloodCount -= bloodloss;
+	blood.innerHTML = bloodCount;
+}
+
+function healDamage(heal) {
+	if ((hp+heal) > hpMax) hp = hpMax;
+	else hp += heal;
+	document.getElementById("hp").innerHTML = hp;
+}
+
+function dealDamage(dmg,type) {
+	if (!firstHPLoss) {
+		firstHPLoss = true;
+		document.getElementById("hpDiv").className = "";
+	}
+	if ((hp-dmg) <= 0) {
+		hp = 0;
+		triggerDeath(type);
+	} else {
+		hp -= dmg;
+	}
+	document.getElementById("hp").innerHTML = hp;
+}
+
 function addEventMsg(txt) {
 	var msg = document.getElementById("msg");
-  msg.style.border = "1px solid black";
+  	msg.style.border = "1px solid black";
 	txt = "-"+txt+"<br />"+msg.innerHTML;
 	msg.innerHTML = txt;
 }
@@ -45,9 +77,12 @@ function bloodButton() {
 }
 
 function enableButton() {
-	herpButton.disabled = false;
-	var btxt = document.getElementById("bloodButton");
-	btxt.innerHTML = "Hunt for Blood";
+	if (!hp && dayStatus != "night") addEventMsg("You are too weak to hunt until pure darkness allows it!");
+	else {
+		herpButton.disabled = false;
+		var btxt = document.getElementById("bloodButton");
+		btxt.innerHTML = "Hunt for Blood";
+	}
 }
 
 function hunt() {
@@ -55,10 +90,16 @@ function hunt() {
 	var bloodCollected;
 	btxt.innerHTML = "Wait to hunt..";
 	herpButton.disabled = true;
-	bloodCollected = 1*multiplier;
-	bloodCount += bloodCollected;
-	blood.innerHTML = bloodCount;
-	addEventMsg("Your hunt yielded "+bloodCollected+" pint(s) of blood!");
+	if (dayStatus == statusCycle[0]) {
+		dealDamage(10,"sunlight");
+		addEventMsg("Hunting in the daylight has hurt you! -10 HP!");
+	} else {
+		bloodCollected = 1*multiplier;
+		bloodCount += bloodCollected;
+		blood.innerHTML = bloodCount;
+		addEventMsg("Your hunt yielded "+bloodCollected+" pint(s) of blood!");
+		healDamage(1);
+	}
 }
 
 function elm(name,props,style){
@@ -96,7 +137,7 @@ function triggers(count) {
 	if((count % 5) == 0 && count > 5) {
 		enableButton();
 	}
-	if (bloodCount >= 1 && !cycleFlag) {
+	if (bloodCount >= 10 && !cycleFlag) {
 		startDayCycle();
 		cycleFlag = true;
 	}
