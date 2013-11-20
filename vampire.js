@@ -173,10 +173,10 @@ function changeDayCycle() {
 
 function triggers(count) {
 	if(count == 5) bloodButton();
-	if(!(count % 2) && count > 5) {
+	if(!(count % 5) && count > 5) {
 		enableButton("bloodButton","hunt","Hunt for Blood");
 	}
-	if(!(count % 5) && bloodCount > 35) {
+	if(!(count % 10) && bloodCount > 35) {
 		enableButton("raidButton","raid","Raid for Gold");
 	}
 	if (bloodCount >= 10 && !cycleFlag) {
