@@ -7,4 +7,4 @@ Created with vanilla javascript by Jordan Alexander (jordan.a.724@gmail.com)
 
 A playable version can be found at my codepen!
 
-http://codepen.io/RUJordan/details/dcwLC (Last updated: 11-20-2013 @ 12:34am)
+http://codepen.io/RUJordan/details/dcwLC (Last updated: 11-20-2013 @ 11:24am)
