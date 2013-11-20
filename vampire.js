@@ -2,13 +2,17 @@ var count = 0;
 var bloodCount = 0;
 var multiplier = 1;
 var dayStatus;
+var goldCount = 0;
 var cycleFlag = false;
-var herpButton;
+var raidFlag = false;
+var goHunting; var goRaiding;
 var hp = 20;
 var hpMax = 20;
+var dead = false;
 var firstHPLoss = false;
 var counter = document.getElementById("counter");
 var blood = document.getElementById("blood");
+var gold = document.getElementById("gold");
 var statusCycle = [
 	"day",
 	"dusk",
@@ -41,6 +45,7 @@ function triggerDeath(cause) {
 	if (bloodCount < 20) bloodCount = 0;
 	else bloodCount -= bloodloss;
 	blood.innerHTML = bloodCount;
+	dead = true;
 }
 
 function healDamage(heal) {
@@ -70,18 +75,25 @@ function addEventMsg(txt) {
 	msg.innerHTML = txt;
 }
 
-function bloodButton() { 
-	herpButton = elm("button",{innerHTML:"Hunt for Blood", id:"bloodButton"},{}); 
-	document.body.appendChild(herpButton);
-	herpButton.addEventListener("click",hunt.bind());
+function raidButton() {
+	goRaiding = elm("button",{innerHTML:"Raid for Gold",id:"raidButton"},{});
+	document.body.appendChild(goRaiding);
+	goRaiding.addEventListener("click",raid.bind());
 }
 
-function enableButton() {
-	if (!hp && dayStatus != "night") addEventMsg("You are too weak to hunt until pure darkness allows it!");
+function bloodButton() { 
+	goHunting = elm("button",{innerHTML:"Hunt for Blood", id:"bloodButton"},{}); 
+	document.body.appendChild(goHunting);
+	goHunting.addEventListener("click",hunt.bind());
+}
+
+function enableButton(bid,bEvent,newTxt) {
+	//accept id and enable triggered button
+	var element = document.getElementById(bid);
+	if (dead && dayStatus != "night") addEventMsg("You are too weak to "+bEvent+" until pure darkness allows it!");
 	else {
-		herpButton.disabled = false;
-		var btxt = document.getElementById("bloodButton");
-		btxt.innerHTML = "Hunt for Blood";
+		element.disabled = false;
+		element.innerHTML = newTxt;
 	}
 }
 
@@ -89,7 +101,7 @@ function hunt() {
 	var btxt = document.getElementById("bloodButton");
 	var bloodCollected;
 	btxt.innerHTML = "Wait to hunt..";
-	herpButton.disabled = true;
+	goHunting.disabled = true;
 	if (dayStatus == statusCycle[0]) {
 		dealDamage(10,"sunlight");
 		addEventMsg("Hunting in the daylight has hurt you! -10 HP!");
@@ -98,6 +110,26 @@ function hunt() {
 		bloodCount += bloodCollected;
 		blood.innerHTML = bloodCount;
 		addEventMsg("Your hunt yielded "+bloodCollected+" pint(s) of blood!");
+		healDamage(1);
+	}
+}
+
+function raid() {
+	var goldDiv = document.getElementById("goldDiv").style.display = "block";
+	var rtxt = document.getElementById("raidButton");
+	var goldCollected;
+	var hpLoss = 0;
+	goRaiding.innerHTML = "Wait to raid..";
+	goRaiding.disabled = true;
+	if (dayStatus == statusCycle[0]) {
+		dealDamage(15,"sunlight");
+		addEventMsg("Raiding in the daylight has hurt you! -15 HP!");
+	} else {
+		hpLoss = Math.floor(Math.random()*(5-1+1)+1);
+		goldCollected = Math.floor((Math.random()*100));
+		goldCount += goldCollected;
+		gold.innerHTML = goldCount;
+		addEventMsg("Your raid yielded "+goldCollected+" gold coins at the cost of "+hpLoss+"HP from the townspeople!");
 		healDamage(1);
 	}
 }
@@ -134,11 +166,18 @@ function startDayCycle() {
 
 function triggers(count) {
 	if(count == 5) bloodButton();
-	if((count % 5) == 0 && count > 5) {
-		enableButton();
+	if(!(count % 2) && count > 5) {
+		enableButton("bloodButton","hunt","Hunt for Blood");
+	}
+	if(!(count % 10) && bloodCount > 35) {
+		enableButton("raidButton","raid","Raid for Gold");
 	}
 	if (bloodCount >= 10 && !cycleFlag) {
 		startDayCycle();
 		cycleFlag = true;
+	}
+	if (bloodCount >= 35 && !raidFlag) {
+		raidButton();
+		raidFlag = true;
 	}
 }
