@@ -1,4 +1,3 @@
-console.log(window.outerHeight);
 var count = 0;
 var bloodCount = 0;
 var multiplier = 1;
@@ -34,6 +33,7 @@ setInterval(function() {
 
 function addEventMsg(txt) {
 	var msg = document.getElementById("msg");
+  msg.style.border = "1px solid black";
 	txt = "-"+txt+"<br />"+msg.innerHTML;
 	msg.innerHTML = txt;
 }
