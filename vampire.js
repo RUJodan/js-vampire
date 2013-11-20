@@ -3,7 +3,7 @@ var bloodCount = 0;
 var multiplier = 1;
 var dayStatus;
 var cycleFlag = false;
-var herpButton; var derpDiv;
+var herpButton;
 var counter = document.getElementById("counter");
 var blood = document.getElementById("blood");
 var statusCycle = [
