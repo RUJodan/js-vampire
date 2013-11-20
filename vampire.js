@@ -1,3 +1,4 @@
+console.log(window.outerHeight);
 var count = 0;
 var bloodCount = 0;
 var multiplier = 1;
@@ -69,10 +70,10 @@ function elm(name,props,style){
 
 function startDayCycle() {
 	var day = document.getElementById("divCycle").style.display = "block";
-	dayStatus = "night";
+	dayStatus = "dusk";
 	var cycle = document.getElementById("cycle");
 	cycle.innerHTML = dayStatus;
-	multiplier = 0;
+	multiplier = 3;
 	setInterval(function() {
 		var index = statusCycle.indexOf(dayStatus);
 		var cycleNext = statusCycle[(index+1)];
@@ -80,7 +81,10 @@ function startDayCycle() {
 			dayStatus = cycleNext;
 			multiplier = huntStatus[cycleNext];
 		}
-		else dayStatus = statusCycle[0];
+		else {
+			dayStatus = statusCycle[0];
+			multiplier = huntStatus[dayStatus];
+		}
 		cycle.innerHTML = dayStatus;
 		var newIndex = statusCycle.indexOf(dayStatus);
 		addEventMsg(dayFlavor[newIndex]);
