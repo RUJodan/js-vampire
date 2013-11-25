@@ -7,8 +7,7 @@ function _player() {
 
 _player.prototype = {
 	isDead : function() {
-		if (engine.player.hp <= 0) return true;
-		else return false;
+		return engine.player.hp <= 0;
 	},
 	revive : function() {
 		if (engine.dayStatus == "night") {
@@ -16,15 +15,13 @@ _player.prototype = {
 		}
 	},
 	healDamage : function(heal) {
-		if ((engine.player.hp+heal) > engine.player.hpMax) engine.player.hp = engine.player.hpMax;
-		else engine.player.hp += heal;
+		engine.player.hp = Math.min(engine.player.hp+heal, engine.player.hpMax);
 		engine.elements.alterHTML("hp",engine.player.hp);
 	},
 	triggerDeath : function(cause,bloodLoss) {
 		engine.elements.eventMsg("You have died from: "+cause);
 		engine.elements.eventMsg("Your death has cost you "+bloodLoss+" pints of your precious blood!");
-		if (engine.player.bloodcount < 20) engine.player.bloodcount = 0;
-		else engine.player.bloodcount -= bloodLoss;
+		engine.player.bloodcount = Math.max(engine.player.bloodcount - bloodLoss, 0);
 		engine.elements.alterHTML("blood",engine.player.bloodcount);
 		engine.elements.disableElement("bloodButton","Wait to Hunt...");
 		engine.elements.disableElement("raidButton","Wait to Raid...");
@@ -34,11 +31,10 @@ _player.prototype = {
 			engine.firstHPLoss = true;
 			engine.elements.showElement("hpDiv","block");
 		}
-		if ((engine.player.hp-dmg) <= 0) {
+		engine.player.hp -= dmg;
+		if (engine.player.hp <= 0) {
 			engine.player.hp = 0;
 			engine.player.triggerDeath(type,bloodLossOnDeath);
-		} else {
-			engine.player.hp -= dmg;
 		}
 		engine.elements.alterHTML("hp",engine.player.hp);
 	},
@@ -49,7 +45,7 @@ _player.prototype = {
 			engine.player.dealDamage(10,"sunlight",20);
 			engine.elements.eventMsg("Hunting in the daylight has hurt you! -10 HP!");
 		} else {
-			bloodCollected = 1*engine.multiplier;
+			bloodCollected = engine.multiplier;
 			engine.player.bloodcount += bloodCollected;
 			engine.elements.alterHTML("blood",engine.player.bloodcount);
 			engine.elements.eventMsg("Your hunt yielded "+bloodCollected+" pint(s) of blood!");
