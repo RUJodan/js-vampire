@@ -1,4 +1,4 @@
-var engine = new _engine();
+var engine = (function(){ return new _engine(); }());
 
 setInterval(function() { 
 	engine.updateCount("counter");
