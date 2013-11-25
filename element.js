@@ -2,7 +2,7 @@ function _element() {
 	this.bloodElement;
 	this.raidElement;
 	this.goHunting;
-	this.goRaiding
+	this.goRaiding;
 }
 
 _element.prototype = {
