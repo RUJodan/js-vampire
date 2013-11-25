@@ -20,21 +20,21 @@ _engine.prototype = {
 	},
 	triggers : function(c) {
 		if (c == 5) this.elements.bloodButton();
-		if (!(c%1) && c > 5) this.elements.enableButton("bloodButton","hunt","Hunt for Blood");
-		if (!(c%1) && this.player.bloodcount > 5) this.elements.enableButton("raidButton","raid","Raid for Gold");
-		if (this.player.bloodcount >= 5 && !this.raidFlag) {
+		if (!(c%3) && c >= 5) this.elements.enableButton("bloodButton","hunt","Hunt for Blood");
+		if (!(c%5) && this.player.bloodcount > 5) this.elements.enableButton("raidButton","raid","Raid for Gold");
+		if (this.player.bloodcount >= 10 && !this.raidFlag) {
 			this.elements.raidButton();
 			this.raidFlag = true;
 		}
-		if (this.player.bloodcount >= 10 && !this.cycleFlag) {
+		if (this.player.bloodcount >= 5 && !this.cycleFlag) {
 			this.initDayCycle();
 			this.cycleFlag = true;
 		}
-		if (!(c%10) && this.cycleFlag) this.nextDayCycle();
+		if (!(c%15) && this.cycleFlag) this.nextDayCycle();
 		if (this.player.isDead() && this.dayStatus == "night") this.player.revive();
 	},
 	initDayCycle : function() {
-		this.elements.showElement("divCycle");
+		this.elements.showElement("divCycle","block");
 		this.elements.alterHTML("cycle",this.dayStatus);
 		this.multiplier = 3;
 	},
