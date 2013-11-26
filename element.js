@@ -25,7 +25,7 @@ _element.prototype = {
 	enableButton : function(id,e,txt) {
 		var element = document.getElementById(id);
 		if (engine.player.isDead() && engine.dayStatus != "night") 
-			this.eventMsg("You are too weak to "+e+" until pure darkness allows it!");
+			this.eventMsg("You are too weak to <span>"+e+"</span> until pure darkness allows it!");
 		else {
 			element.disabled = false;
 			this.alterHTML(id,txt);
