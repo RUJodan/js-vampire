@@ -37,6 +37,7 @@ _element.prototype = {
 	eventMsg : function(txt) {
 		this.addBorder("msg");
 		var temp = document.getElementById("msg");
+		temp.style.display = "block"
 		txt = "-"+txt+"<br />"+temp.innerHTML;
 		temp.innerHTML = txt;
 	},
