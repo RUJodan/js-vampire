@@ -32,6 +32,9 @@ _engine.prototype = {
 		}
 		if (!(c%15) && this.cycleFlag) this.nextDayCycle();
 		if (this.player.isDead() && this.dayStatus == "night") this.player.revive();
+		if (this.player.goldCount > 500) {
+			this.elements.showElement("shop","block");
+		}
 	},
 	initDayCycle : function() {
 		this.elements.showElement("divCycle","block");

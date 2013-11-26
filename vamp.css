@@ -5,7 +5,7 @@
 	margin-right: 50px;
 	padding: 5px;
 }
-.hp, .cycle, .gold, .msg {
+.hp, .cycle, .gold, .msg, .shop {
 	display:none;
 }
 .title {
