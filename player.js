@@ -19,8 +19,8 @@ _player.prototype = {
 		engine.elements.alterHTML("hp",engine.player.hp);
 	},
 	triggerDeath : function(cause,bloodLoss) {
-		engine.elements.eventMsg("You have died from: "+cause);
-		engine.elements.eventMsg("Your death has cost you "+bloodLoss+" pints of your precious blood!");
+		engine.elements.eventMsg("You have died from: <span>"+cause+"</span>");
+		engine.elements.eventMsg("Your death has cost you <span>"+bloodLoss+"</span> pints of your precious blood!");
 		engine.player.bloodcount = Math.max(engine.player.bloodcount - bloodLoss, 0);
 		engine.elements.alterHTML("blood",engine.player.bloodcount);
 		engine.elements.disableElement("bloodButton","Wait to Hunt...");
@@ -69,7 +69,7 @@ _player.prototype = {
 			engine.elements.alterHTML("gold",engine.player.goldCount);
 			var goldgrammar = "coins";
 			if (goldCollected == 1) goldgrammar = "coin";
-			engine.elements.eventMsg("Your raid yielded <span>"+goldCollected+"</span> gold "+goldgrammar+" at the cost of "+hpLoss+"HP from the townspeople!");
+			engine.elements.eventMsg("Your raid yielded <span>"+goldCollected+"</span> gold "+goldgrammar+" at the cost of <span>"+hpLoss+"</span> HP from the townspeople!");
 			engine.player.dealDamage(hpLoss,"raiding",15);
 		}
 	}

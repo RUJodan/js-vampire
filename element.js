@@ -29,7 +29,7 @@ _element.prototype = {
 		var element = document.getElementById(id);
 		element.disabled = true;
 		element.innerHTML = txt;
-		element.style.color = "#5555555";
+		element.style.color = "#666666";
 	},
 	enableButton : function(id,e,txt) {
 		var element = document.getElementById(id);
@@ -38,6 +38,7 @@ _element.prototype = {
 		else {
 			element.disabled = false;
 			this.alterHTML(id,txt);
+			element.style.color = "#BB0000";
 		}
 	},
 	addBorder : function(id) {
