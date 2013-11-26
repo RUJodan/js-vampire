@@ -5,10 +5,16 @@
 	margin-right: 50px;
 	padding: 5px;
 }
-.hp, .cycle, .gold, .msg, .shop {
+.hp, .cycle, .gold, .msg, .middleCol, .battle {
 	display:none;
 }
 .title {
+	text-shadow: 0px 1px 1px #4d4d4d;
+    color: #999999;
+    font-family:'Papyrus';
+    text-align: center;
+}
+.miniTitle {
 	text-shadow: 0px 1px 1px #4d4d4d;
     color: #999999;
     font-family:'Papyrus';
