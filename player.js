@@ -21,12 +21,7 @@ _player.prototype = {
 	triggerDeath : function(cause,bloodLoss) {
 		engine.elements.eventMsg("You have died from: "+cause);
 		engine.elements.eventMsg("Your death has cost you "+bloodLoss+" pints of your precious blood!");
-<<<<<<< HEAD
-		if ((engine.player.bloodcount-bloodLoss) <= 0) engine.player.bloodcount = 0;
-		else engine.player.bloodcount -= bloodLoss;
-=======
 		engine.player.bloodcount = Math.max(engine.player.bloodcount - bloodLoss, 0);
->>>>>>> 9265288e1347530f41c3a9693a6ee3ec1a47cd2d
 		engine.elements.alterHTML("blood",engine.player.bloodcount);
 		engine.elements.disableElement("bloodButton","Wait to Hunt...");
 		engine.elements.disableElement("raidButton","Wait to Raid...");
