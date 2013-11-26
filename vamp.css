@@ -5,7 +5,18 @@
 	margin-right: 50px;
 	padding: 5px;
 	font-size: small;
-} 
+}
+body {
+	padding:10px;
+	padding-bottom:60px;
+}
+.footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:20px;
+	background:black;
+}
 .hp, .cycle, .gold, .msg, .middleCol, 
 .battle, .hiddenCounter {
 	display:none;
@@ -49,7 +60,7 @@ div, span {
 	font-family: "Papyrus";
 	color:#999999;
 }
-span {
+span, a {
 	color:#BB0000;
 }
 .noRed {
