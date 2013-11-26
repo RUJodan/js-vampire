@@ -51,12 +51,12 @@ _element.prototype = {
 		msg.innerHTML = txt;
 	},
 	bloodButton : function() { 
-		this.goHunting = this.makeElement("button",{innerHTML:"Hunt for Blood", id:"bloodButton"},{}); 
+		this.goHunting = this.makeElement("button",{innerHTML:"Hunt for Blood", id:"bloodButton"},{width:"150px"}); 
 		document.getElementById("stats").appendChild(this.goHunting);
 		this.goHunting.addEventListener("click",engine.player.hunt.bind());
 	},
 	raidButton : function() { 
-		this.goRaiding = this.makeElement("button",{innerHTML:"Raid for Gold", id:"raidButton"},{}); 
+		this.goRaiding = this.makeElement("button",{innerHTML:"Raid for Gold", id:"raidButton"},{width:"150px"}); 
 		document.getElementById("stats").appendChild(this.goRaiding);
 		this.goRaiding.addEventListener("click",engine.player.raid.bind());
 	}
