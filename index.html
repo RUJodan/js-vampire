@@ -5,13 +5,16 @@
 		<link rel="stylesheet" href="vamp.css">
 	</head>
 	<body>
-	<div id="stats">
-		<div id="msg" class="msg"></div>
-		<div>You have been dead for <span id="counter">0</span> hours..</div>
-		<div id="divCycle" class="cycle">It is currently: <span id="cycle"></span></div>
-		<div>Blood: <span id="blood">0</span></div>
-		<div class="hp" id="hpDiv">HP: <span id="hp">20</span></div>
-		<div class="gold" id="goldDiv">Gold: <span id="gold">0</span></div>
+	<div class="main">
+		<div id="stats" class="column">
+			<div>You have been dead for <span id="counter">0</span> hours..</div>
+			<div id="divCycle" class="cycle">It is currently: <span id="cycle"></span></div>
+			<div>Blood: <span id="blood">0</span></div>
+			<div class="hp" id="hpDiv">HP: <span id="hp">20</span></div>
+			<div class="gold" id="goldDiv">Gold: <span id="gold">0</span></div>
+		</div>
+		<div id="shop" class="column"></div>
+		<div id="msg" class="msg column"></div>
 	</div>
 		<script src="player.js"></script>
 		<script src="element.js"></script>
