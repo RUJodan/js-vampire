@@ -23,7 +23,7 @@ _player.prototype = {
 	triggerDeath : function(cause,bloodLoss) {
 		engine.elements.eventMsg("You have died from: "+cause);
 		engine.elements.eventMsg("Your death has cost you "+bloodLoss+" pints of your precious blood!");
-		if (engine.player.bloodcount < 20) engine.player.bloodcount = 0;
+		if ((engine.player.bloodcount-bloodLoss) <= 0) engine.player.bloodcount = 0;
 		else engine.player.bloodcount -= bloodLoss;
 		engine.elements.alterHTML("blood",engine.player.bloodcount);
 		engine.elements.disableElement("bloodButton","Wait to Hunt...");
