@@ -45,11 +45,10 @@ _element.prototype = {
 		document.getElementById(id).style.border = "1px solid black";
 	},
 	eventMsg : function(txt) {
-		this.addBorder("msg");
-		var temp = document.getElementById("msg");
-		temp.style.display = "block"
-		txt = "-"+txt+"<br />"+temp.innerHTML;
-		temp.innerHTML = txt;
+		this.showElement("log","inline-table");
+		var msg = document.getElementById("msg");
+		txt = "-"+txt+"<br />"+msg.innerHTML;
+		msg.innerHTML = txt;
 	},
 	bloodButton : function() { 
 		this.goHunting = this.makeElement("button",{innerHTML:"Hunt for Blood", id:"bloodButton"},{}); 

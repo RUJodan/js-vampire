@@ -5,10 +5,12 @@
 		<link rel="stylesheet" href="vamp.css">
 	</head>
 	<body>
-	<h2 class="title">A Vampire's Hunt</h2>
+	<h1 class="title">A Vampire's Hunt</h1>
 	<div class="main">
 		<div id="stats" class="column">
 			<div>
+				<h3 class="miniTitle">Stats</h3>
+				<hr />
 				<span id="spanCounter" class="hiddenCounter noRed">You have been dead for <span id="counter">0</span> hour<span id="singularHours" class="noRed"></span>..</span>
 				<span id="spanInitMsg" class="spanInitMsg noRed">You are dead!</span>
 			</div>
@@ -16,17 +18,24 @@
 			<div>Blood: <span id="blood">0</span></div>
 			<div class="hp" id="hpDiv">HP: <span id="hp">20</span></div>
 			<div class="gold" id="goldDiv">Gold: <span id="gold">0</span></div>
+			<h3 class="miniTitle">Actions</h3>
+			<hr />
 		</div>
 		<div id="middleCol" class="column middleCol">
 			<div id="shop" class="shop">
-				<h5 class="miniTitle">A Dark Alleyway</h5>
+				<h4 class="miniTitle">A Dark Alleyway</h4>
+				<hr />
 				Herp Derp Derp
 			</div>
 			<div id="battle" class="battle">
 				<hr />
 			</div>
 		</div>
-		<div id="msg" class="msg column"></div>
+		<div id="log" class="log column">
+			<h3 class="miniTitle">Event Log</h3>
+			<hr />
+			<div id="msg" class="msg"></div>
+		</div>
 	</div>
 		<script src="player.js"></script>
 		<script src="element.js"></script>

@@ -1,8 +1,7 @@
 .msg {
-	float: right;
-	width:30% auto;
+	float: left;
+	width:auto;
 	overflow:auto;
-	margin-right: 50px;
 	padding: 5px;
 	font-size: small;
 }
@@ -10,28 +9,48 @@ body {
 	padding:10px;
 	padding-bottom:60px;
 }
+hr {
+    height: 30px;
+    border-style: solid;
+    border-color: #BB0000;
+    border-width: 1px 0 0 0;
+    border-radius: 30px;
+    width:90%;
+    margin:auto;
+}
+hr:before {
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -30px;    
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 30px;
+}
 .footer {
 	position:absolute;
 	bottom:0;
-	width:100%;
+	width:95%;
 	height:20px;
 	background:black;
 }
-.hp, .cycle, .gold, .msg, .middleCol, 
+.hp, .cycle, .gold, .log, .middleCol, 
 .battle, .hiddenCounter {
 	display:none;
 }
 .title {
-	text-shadow: 0px 1px 1px #4d4d4d;
-    color: #666666;
-    font-family:'Papyrus';
-    text-align: center;
-}
-.miniTitle {
-	text-shadow: 0px 1px 1px #4d4d4d;
+	text-shadow:100px 15px 5px #4d4d4d;
     color: #999999;
     font-family:'Papyrus';
     text-align: center;
+    margin-top:5px;
+}
+.miniTitle {
+    color: #999999;
+    font-family:'Papyrus';
+    text-align: center;
+    margin:auto;
 }
 .column {
 	padding:3px;
@@ -47,7 +66,7 @@ body {
 .main {
 	margin-right: auto;
 	margin-left: auto;
-	width:90%;
+	width:95%;
 	position:relative;
 }
 body, html {
