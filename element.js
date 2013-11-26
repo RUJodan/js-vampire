@@ -6,6 +6,13 @@ function _element() {
 }
 
 _element.prototype = {
+	initCounter : function() {
+		document.getElementById("spanCounter").style.display = "block";
+		document.getElementById("spanInitMsg").style.display = "none";
+	},
+	pluralize : function(id) {
+		document.getElementById(id).innerHTML = "s";
+	},
 	alterHTML : function(id,txt) {
 		document.getElementById(id).innerHTML = txt;
 	},
@@ -19,8 +26,10 @@ _element.prototype = {
 		document.getElementById(id).style.display = style;
 	},
 	disableElement : function(id,txt) {
-		document.getElementById(id).disabled = true;
-		document.getElementById(id).innerHTML = txt;
+		var element = document.getElementById(id);
+		element.disabled = true;
+		element.innerHTML = txt;
+		element.style.color = "#5555555";
 	},
 	enableButton : function(id,e,txt) {
 		var element = document.getElementById(id);

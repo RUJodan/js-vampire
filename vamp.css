@@ -4,8 +4,10 @@
 	overflow:auto;
 	margin-right: 50px;
 	padding: 5px;
-}
-.hp, .cycle, .gold, .msg, .middleCol, .battle {
+	font-size: small;
+} 
+.hp, .cycle, .gold, .msg, .middleCol, 
+.battle, .hiddenCounter {
 	display:none;
 }
 .title {
@@ -49,6 +51,9 @@ div, span {
 }
 span {
 	color:#BB0000;
+}
+.noRed {
+	color:#999999;
 }
 button {
 	background-color: black;

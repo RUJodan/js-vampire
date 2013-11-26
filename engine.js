@@ -19,9 +19,11 @@ _engine.prototype = {
 		this.triggers(this.count);
 	},
 	triggers : function(c) {
+		if (c == 1) this.elements.initCounter();
+		if (c > 1) this.elements.pluralize("singularHours");
 		if (c == 5) this.elements.bloodButton();
 		if (!(c%3) && c >= 5) this.elements.enableButton("bloodButton","hunt","Hunt for Blood");
-		if (!(c%5) && this.player.bloodcount > 5) this.elements.enableButton("raidButton","raid","Raid for Gold");
+		if (!(c%5) && this.player.bloodcount > 5 && this.raidFlag) this.elements.enableButton("raidButton","raid","Raid for Gold");
 		if (this.player.bloodcount >= 10 && !this.raidFlag) {
 			this.elements.raidButton();
 			this.raidFlag = true;

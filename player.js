@@ -48,7 +48,9 @@ _player.prototype = {
 			bloodCollected = engine.multiplier;
 			engine.player.bloodcount += bloodCollected;
 			engine.elements.alterHTML("blood",engine.player.bloodcount);
-			engine.elements.eventMsg("Your hunt yielded <span>"+bloodCollected+"</span> pint(s) of blood!");
+			var pgrammar = "pints";
+			if (bloodCollected == 1) pgrammar = "pint"; 
+			engine.elements.eventMsg("Your hunt yielded <span>"+bloodCollected+"</span> "+pgrammar+" of blood!");
 			engine.player.healDamage(1);
 		}
 	},
@@ -65,7 +67,9 @@ _player.prototype = {
 			goldCollected = Math.floor((Math.random()*100));
 			engine.player.goldCount += goldCollected;
 			engine.elements.alterHTML("gold",engine.player.goldCount);
-			engine.elements.eventMsg("Your raid yielded <span>"+goldCollected+"</span> gold coins at the cost of "+hpLoss+"HP from the townspeople!");
+			var goldgrammar = "coins";
+			if (goldCollected == 1) goldgrammar = "coin";
+			engine.elements.eventMsg("Your raid yielded <span>"+goldCollected+"</span> gold "+goldgrammar+" at the cost of "+hpLoss+"HP from the townspeople!");
 			engine.player.dealDamage(hpLoss,"raiding",15);
 		}
 	}
