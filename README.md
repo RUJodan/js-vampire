@@ -7,4 +7,6 @@ Created with vanilla javascript by Jordan Alexander (jordan.a.724@gmail.com)
 
 A playable version can be found at my codepen!
 
-http://codepen.io/RUJordan/full/dcwLC (Last updated: 11-26-2013 @ 12:52pm)
+http://phantasyrpg.com/Chaos/Vampire/ (Last updated: 11-26-2013 @ 12:52pm)
+
+Thank you PhantasyRPG.com for the hosting space!
